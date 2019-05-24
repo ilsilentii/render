@@ -15,19 +15,31 @@ var scene = new BABYLON.Scene(engine);
   camera.inputs.clear();
 
   var light = new BABYLON.PointLight("pointLight", new BABYLON.Vector3(10, 0, -20), scene);
-  light.intensity = 0.8;
-  light.specular = new BABYLON.Color3(0.1, 0.1, 0.1,);
+  light.intensity = 1.5;
+
+  light.specular = new BABYLON.Color3(0, 0, 0);
   
 	var sphere = BABYLON.MeshBuilder.CreateSphere("sphere", {diameter: 8}, scene);
   sphere.position.x = 2.9;
   sphere.position.y = -1
 
+  
+
+
 	var materialSphere = new BABYLON.StandardMaterial("earth", scene);
-	materialSphere.diffuseTexture = new BABYLON.Texture("earth.png", scene);
+	//materialSphere.diffuseTexture = new BABYLON.Texture("earth.png", scene);
 
-  //lightSphere = emissiveTexture = new BABYLON.Texture("earth2.png", scene);
+   materialSphere.diffuseTexture = new BABYLON.Texture('earth_final.png', scene)
+   //materialSphere.emissiveTexture = new BABYLON.Texture('lights2.png', scene);
+   //materialSphere.opacityTexture = new BABYLON.Texture('lights2.png',scene)
+
+  var mix = new BABYLON.MixMaterial("mix", scene);
+
+  mix.earthTexture = new BABYLON.Texture("earth.png", scene);
+  //mix.lightTexture = new BABYLON.Texture('lights.png', scene)
 
 
+  var gl =new BABYLON.GlowLayer('glow', scene)
   
 	sphere.material = materialSphere;
 
@@ -45,5 +57,6 @@ var scene = new BABYLON.Scene(engine);
   engine.runRenderLoop(function () {
     scene.render();
     sphere.rotate(BABYLON.Axis.Y, -0.0005, BABYLON.Space.WORLD);
+
     
   });
