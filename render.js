@@ -1,3 +1,7 @@
+$(function() {
+
+
+
 var canvas = document.getElementById('renderCanvas');
 
 var engine = new BABYLON.Engine(canvas, true);
@@ -14,10 +18,14 @@ var scene = new BABYLON.Scene(engine);
   camera.setPosition(new BABYLON.Vector3(0, 0, -9.2));
   camera.inputs.clear();
 
-  var light = new BABYLON.PointLight("pointLight", new BABYLON.Vector3(10, 0, -20), scene);
-  light.intensity = 1.5;
+  var light = new BABYLON.PointLight("pointLight", new BABYLON.Vector3(1, -1, -5), scene); // (10,0,-20)
+  //var light = new BABYLON.SpotLight("spotLight", new BABYLON.Vector3(-30, 10, 0), new BABYLON.Vector3(0, -1, 0), Math.PI / 3, 2, scene);
 
-  light.specular = new BABYLON.Color3(0, 0, 0);
+  light.intensity = 4;
+
+  //light.diffuse = new BABYLON.Color3(0.4157, 0.6, 0.9294);
+  light.specular = new BABYLON.Color3(0.5, 0.5, 0.5);
+
   
 	var sphere = BABYLON.MeshBuilder.CreateSphere("sphere", {diameter: 8}, scene);
   sphere.position.x = 2.9;
@@ -29,13 +37,38 @@ var scene = new BABYLON.Scene(engine);
 	var materialSphere = new BABYLON.StandardMaterial("earth", scene);
 	//materialSphere.diffuseTexture = new BABYLON.Texture("earth.png", scene);
 
-   materialSphere.diffuseTexture = new BABYLON.Texture('earth_final.png', scene)
+   materialSphere.diffuseTexture = new BABYLON.Texture('texture.jpg', scene)
+   materialSphere.specularTexture = new BABYLON.Texture("texture.jpg", scene);
+   materialSphere.specularPower = 3;
    //materialSphere.emissiveTexture = new BABYLON.Texture('lights2.png', scene);
    //materialSphere.opacityTexture = new BABYLON.Texture('lights2.png',scene)
 
   var mix = new BABYLON.MixMaterial("mix", scene);
 
-  mix.earthTexture = new BABYLON.Texture("earth.png", scene);
+  function textureEarth() {
+
+        $.ajax({
+            method: 'GET',
+            url: "https://api.fantalitystudios.ca/resources/heatmap",
+            success: function(data) {
+              console.log(data)
+                let earth = new Image();
+                earth.src = data.image;
+                
+                
+               
+            
+            }
+        });
+
+    } 
+
+textureEarth()
+
+  mix.earthTexture = new BABYLON.Texture("earth_final", scene);
+
+  //mix.earthTexture = new BABYLON.Texture("eearth.png", scene);
+
   //mix.lightTexture = new BABYLON.Texture('lights.png', scene)
 
 
@@ -60,3 +93,6 @@ var scene = new BABYLON.Scene(engine);
 
     
   });
+
+
+  })
