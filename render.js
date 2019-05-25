@@ -18,13 +18,13 @@ var scene = new BABYLON.Scene(engine);
   camera.setPosition(new BABYLON.Vector3(0, 0, -9.2));
   camera.inputs.clear();
 
-  var light = new BABYLON.PointLight("pointLight", new BABYLON.Vector3(1, -1, -5), scene); // (10,0,-20)
+  var light = new BABYLON.PointLight("pointLight", new BABYLON.Vector3(1, -1, -6), scene); // (10,0,-20)
   //var light = new BABYLON.SpotLight("spotLight", new BABYLON.Vector3(-30, 10, 0), new BABYLON.Vector3(0, -1, 0), Math.PI / 3, 2, scene);
 
   light.intensity = 4;
 
   //light.diffuse = new BABYLON.Color3(0.4157, 0.6, 0.9294);
-  light.specular = new BABYLON.Color3(0.5, 0.5, 0.5);
+  light.specular = new BABYLON.Color3(1.5,1.5,1.5);
 
   
 	var sphere = BABYLON.MeshBuilder.CreateSphere("sphere", {diameter: 8}, scene);
@@ -39,7 +39,7 @@ var scene = new BABYLON.Scene(engine);
 
    materialSphere.diffuseTexture = new BABYLON.Texture('texture.jpg', scene)
    materialSphere.specularTexture = new BABYLON.Texture("texture.jpg", scene);
-   materialSphere.specularPower = 3;
+   materialSphere.specularPower = 5;
    //materialSphere.emissiveTexture = new BABYLON.Texture('lights2.png', scene);
    //materialSphere.opacityTexture = new BABYLON.Texture('lights2.png',scene)
 
